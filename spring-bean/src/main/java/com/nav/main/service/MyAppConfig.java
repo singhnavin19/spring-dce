@@ -12,6 +12,6 @@ public class MyAppConfig {
 
     @Bean
     public BasicCalculation basicCalculation(){
-        return new BasicCalculation();
+        return new BasicCalculation("navin");
     }
 }
