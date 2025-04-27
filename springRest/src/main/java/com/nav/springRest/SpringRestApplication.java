@@ -7,14 +7,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class SpringRestApplication implements CommandLineRunner {
-	@Autowired
-	StudentController studentController;
 	public static void main(String[] args) {
 		SpringApplication.run(SpringRestApplication.class, args);
 	}
 
 	@Override
 	public void run(String... args) throws Exception {
-		System.out.println(studentController.studentList);
 	}
 }
