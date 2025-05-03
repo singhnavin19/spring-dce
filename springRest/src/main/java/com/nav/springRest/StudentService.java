@@ -17,9 +17,21 @@ public class StudentService {
 
     }
 
+    public Student getStudentById(int searchId){
+        for(Student s:students){
+            if(s.id==searchId){
+                return s;
+            }
+        }
+        return null;
+    }
+
     private static Student getStudent(int id,String fname,String lname,String address,long mobNo) {
         return new Student(id, fname, lname, address,mobNo );
     }
 
 
+    public void deleteStudentById(int id) {
+        //tum log write karo
+    }
 }

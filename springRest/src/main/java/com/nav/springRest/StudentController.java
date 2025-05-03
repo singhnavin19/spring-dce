@@ -17,27 +17,38 @@ public class StudentController {
     @Autowired
     private StudentService studentService;
 
-    @GetMapping("/all")
+    @GetMapping("/allStudent")
     public List<Student> getAllStudents(){
         return  studentService.students;
     }
 
-//    @GetMapping("/id/{id}")
-//    public String getById(@PathVariable Integer id){
-//        return  studentService.students.get(id);
-//    }
-//
-//    @GetMapping("/id")
-//    public String getById1(@RequestParam("id") Integer id){
-//        return  studentService.students.get(id);
-//    }
-//
-//    @PostMapping("/add")
-//    public String addStudents(@RequestBody String name){
-//        Random r=new Random();
-//        int id = r.nextInt(100);
-//        studentService.students.put(id,name);
-//        return "name ="+name+" and id="+id;
-//    }
+    @GetMapping("/id/{id}")
+    public Student getById(@PathVariable Integer id){
+        return  studentService.getStudentById(id);
+    }
 
+    @GetMapping("/id")
+    public Student getById1(@RequestParam("id") Integer id){
+        return  studentService.getStudentById(id);
+    }
+
+    @PostMapping("/add")
+    public Student addStudents(@RequestBody Student student){
+        student.setId(new Random().nextInt(100));
+        studentService.students.add(student);
+        return student;
+    }
+
+    @PutMapping("/id/{id}")
+    public Student update(@RequestBody Student student){
+        Student dbStudent=studentService.getStudentById(student.getId());
+        dbStudent.setFirsName(student.getFirsName());
+        dbStudent.setAddress(student.getAddress());
+        return dbStudent;
+    }
+
+    @DeleteMapping("/id/{id}")
+    public void delete(@PathVariable  int id){
+        studentService.deleteStudentById(id);
+    }
 }
