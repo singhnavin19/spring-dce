@@ -23,8 +23,14 @@ public class StudentController {
     }
 
     @GetMapping("/id/{id}")
-    public Student getById(@PathVariable Integer id){
-        return  studentService.getStudentById(id);
+    public String getById(@PathVariable Integer id){
+        return  studentService.getStudentById(id).toString();
+    }
+    @GetMapping("/nameById/{id}")
+    public String getNameById(@PathVariable Integer id){
+        int i=0;
+        System.out.println(10/i);
+        return  studentService.getStudentById(id).getFirsName();
     }
 
     @GetMapping("/id")
@@ -51,4 +57,5 @@ public class StudentController {
     public void delete(@PathVariable  int id){
         studentService.deleteStudentById(id);
     }
+
 }
