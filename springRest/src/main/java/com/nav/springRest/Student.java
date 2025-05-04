@@ -1,11 +1,20 @@
 package com.nav.springRest;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 public class Student {
-    int id;
-    String firsName;
-    String lastName;
-    String address;
-    long mobileNo;
+    private int id;
+    @NotNull
+    private String firsName;
+    @NotBlank
+    @NotNull
+    @Size(min = 2,max = 50)
+    private String lastName;
+    private String address;
+    private long mobileNo;
 
     public int getId() {
         return id;

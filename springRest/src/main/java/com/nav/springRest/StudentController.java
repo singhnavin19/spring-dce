@@ -39,7 +39,7 @@ public class StudentController {
     }
 
     @PostMapping("/add")
-    public Student addStudents(@RequestBody Student student){
+    public Student addStudents(@RequestBody @Valid Student student){
         student.setId(new Random().nextInt(100));
         studentService.students.add(student);
         return student;

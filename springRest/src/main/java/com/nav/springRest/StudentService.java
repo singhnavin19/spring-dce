@@ -19,7 +19,7 @@ public class StudentService {
 
     public Student getStudentById(int searchId){
         for(Student s:students){
-            if(s.id==searchId){
+            if(s.getId()==searchId){
                 return s;
             }
         }
@@ -34,7 +34,7 @@ public class StudentService {
     public void deleteStudentById(int id) throws Exception {
         int indexToRemove=-1;
         for(int i=0;i<students.size();i++){
-            if(students.get(i).id==id){
+            if(students.get(i).getId()==id){
                indexToRemove=i;
                break;
             }
