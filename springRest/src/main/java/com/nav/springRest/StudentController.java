@@ -54,7 +54,7 @@ public class StudentController {
     }
 
     @DeleteMapping("/id/{id}")
-    public void delete(@PathVariable  int id){
+    public void delete(@PathVariable  int id) throws Exception{
         studentService.deleteStudentById(id);
     }
 

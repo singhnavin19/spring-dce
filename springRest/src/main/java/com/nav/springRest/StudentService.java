@@ -31,7 +31,18 @@ public class StudentService {
     }
 
 
-    public void deleteStudentById(int id) {
-        //tum log write karo
+    public void deleteStudentById(int id) throws Exception {
+        int indexToRemove=-1;
+        for(int i=0;i<students.size();i++){
+            if(students.get(i).id==id){
+               indexToRemove=i;
+               break;
+            }
+        }
+        if(indexToRemove>=0){
+            students.remove(indexToRemove);
+        }else{
+            throw new Exception(" no student for deletion");
+        }
     }
 }
