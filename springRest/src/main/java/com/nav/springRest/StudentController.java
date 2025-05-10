@@ -2,6 +2,8 @@ package com.nav.springRest;
 
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,13 +20,17 @@ public class StudentController {
     private StudentService studentService;
 
     @GetMapping("/allStudent")
-    public List<Student> getAllStudents(){
-        return  studentService.students;
+    public ResponseEntity<List<Student>> getAllStudents(){
+        return  new ResponseEntity<>(studentService.students, HttpStatus.OK);
     }
 
     @GetMapping("/id/{id}")
-    public String getById(@PathVariable Integer id){
-        return  studentService.getStudentById(id).toString();
+    public ResponseEntity<Student> getById(@PathVariable Integer id){
+        Student student=studentService.getStudentById(id);
+        if(student==null){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return  ResponseEntity.ok(student);
     }
     @GetMapping("/nameById/{id}")
     public String getNameById(@PathVariable Integer id){
