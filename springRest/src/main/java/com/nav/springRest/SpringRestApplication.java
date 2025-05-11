@@ -15,6 +15,8 @@ public class SpringRestApplication  {
 
 	@Autowired
 	public Environment environment;
+	@Autowired
+	StudentRepository studentRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringRestApplication.class, args);
@@ -23,8 +25,11 @@ public class SpringRestApplication  {
 	@Bean
 	CommandLineRunner commandLineRunner(){
 		return (arg)->{
-			System.out.println(environment.getProperty("student.name"));
-//			System.out.println("property from application.proprties file is "+studentName);
+//			studentRepository.save(new StudentEntity("omkar"," G","Kandivali",123));
+//			studentRepository.save(new StudentEntity("omkar"," P","borivali",123));
+//			studentRepository.save(new StudentEntity("Abhinay"," T","mira road",123));
+//			studentRepository.save(new StudentEntity("Krishna"," H","churchgate",123));
+//			studentRepository.save(new StudentEntity("Azmat"," k","Malad",123));
 		};
 	}
 

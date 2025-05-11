@@ -7,10 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 @RestController
 @RequestMapping("/student")
@@ -19,18 +16,23 @@ public class StudentController {
     @Autowired
     private StudentService studentService;
 
+    @Autowired
+    StudentRepository studentRepository;
+
     @GetMapping("/allStudent")
-    public ResponseEntity<List<Student>> getAllStudents(){
-        return  new ResponseEntity<>(studentService.students, HttpStatus.OK);
+    public ResponseEntity<String> getAllStudents(){
+        System.out.println(studentRepository.findAll());
+        return  new ResponseEntity<>(studentRepository.findAll().toString(), HttpStatus.OK);
     }
 
     @GetMapping("/id/{id}")
-    public ResponseEntity<Student> getById(@PathVariable Integer id){
-        Student student=studentService.getStudentById(id);
-        if(student==null){
+    public ResponseEntity<String> getById(@PathVariable Long id){
+        Optional<StudentEntity> student=studentRepository.findById(id);
+        StudentEntity studentEntity=student.get();
+        if(studentEntity==null){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
-        return  ResponseEntity.ok(student);
+        return  ResponseEntity.ok(studentEntity.toString());
     }
     @GetMapping("/nameById/{id}")
     public String getNameById(@PathVariable Integer id){
