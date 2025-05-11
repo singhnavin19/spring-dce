@@ -20,19 +20,19 @@ public class StudentController {
     StudentRepository studentRepository;
 
     @GetMapping("/allStudent")
-    public ResponseEntity<String> getAllStudents(){
+    public ResponseEntity<List<StudentEntity>> getAllStudents(){
         System.out.println(studentRepository.findAll());
-        return  new ResponseEntity<>(studentRepository.findAll().toString(), HttpStatus.OK);
+        return  new ResponseEntity<>(studentRepository.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("/id/{id}")
-    public ResponseEntity<String> getById(@PathVariable Long id){
+    public ResponseEntity<StudentEntity> getById(@PathVariable Long id){
         Optional<StudentEntity> student=studentRepository.findById(id);
         StudentEntity studentEntity=student.get();
         if(studentEntity==null){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
-        return  ResponseEntity.ok(studentEntity.toString());
+        return  ResponseEntity.ok(studentEntity);
     }
     @GetMapping("/nameById/{id}")
     public String getNameById(@PathVariable Integer id){
