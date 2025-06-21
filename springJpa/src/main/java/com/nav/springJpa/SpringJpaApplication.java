@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Bean;
 import javax.sql.DataSource;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Supplier;
 
 @SpringBootApplication
 public class SpringJpaApplication {
@@ -25,17 +26,18 @@ public class SpringJpaApplication {
 	@Bean
 	CommandLineRunner commandLineRunner(){
 		return args->{
+//			insertData();
 			List<StudentEntity> students=studentRepository.findAll();
 			System.out.println(students);
-			Optional<StudentEntity> studentEntity=studentRepository.findById(1);
-			System.out.println(studentEntity.get());
+
+			System.out.println(studentRepository.getStudents("navin"));
 		};
 	}
 
-//	private void insertData() {
-//		studentRepository.save(new StudentEntity("Navin","Singh","B","Hanuman Nagar",StudentType.LATE));
-//		studentRepository.save(new StudentEntity("Navin1","Singh1","B","Hanuman Nagar",StudentType.LATE));
-//		studentRepository.save(new StudentEntity("Navin2","Singh2","B","Hanuman Nagar",StudentType.LATE));
-//	}
+	private void insertData() {
+		studentRepository.save(StudentEntity.builder().lastName("navin").build());
+		studentRepository.save(StudentEntity.builder().lastName("navin1").build());
+		studentRepository.save(StudentEntity.builder().lastName("navin2").build());
+	}
 
 }
