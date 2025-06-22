@@ -11,11 +11,21 @@
         <module name="spring-bean" />
         <module name="springRest" />
       </profile>
+      <profile name="Annotation profile for spring-mvc" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
+        </processorPath>
+        <module name="spring-mvc" />
+      </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="spring-bean" options="-parameters" />
+      <module name="spring-mvc" options="-parameters" />
       <module name="springJpa" options="-parameters" />
       <module name="springRest" options="-parameters" />
     </option>

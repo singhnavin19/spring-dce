@@ -1,0 +1,22 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+    <h1>hello</h1>
+    <p th:text="${allStudent}">defaultName</p>
+
+<table border="1">
+    <tr>
+        <td>ID</td>
+         <td>Name</td>
+    </tr>
+    <tr>
+        <td th:text="${studentDetail.getStudentId()}"></td>
+        <td th:text="${studentDetail.getStudentName()}"></td>
+    </tr>
+
+
+</table>
+
+</body>
+</html>
