@@ -9,6 +9,11 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "student")
 public class StudentEntity {
+    public StudentEntity() {
+    }
+    public StudentEntity(String studentName) {
+        this.studentName = studentName;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -17,6 +22,17 @@ public class StudentEntity {
 
     @Column(name = "student_name")
     private String studentName;
+
+    @Column(name = "address")
+    private String address;
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
     public int getStudentId() {
         return studentId;

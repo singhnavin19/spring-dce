@@ -23,13 +23,12 @@ public class HelloController {
         return "welcome";
     }
 
-    @GetMapping(value = "/createStudent")
-    public String createStudent(Model model){
-        StudentEntity studentEntity=new StudentEntity();
-        studentEntity.setStudentName("hello1");
-        studentRepository.save(studentEntity);
-        return "welcome";
-    }
+//    public String createStudent(Model model){
+//        StudentEntity studentEntity=new StudentEntity();
+//        studentEntity.setStudentName("hello1");
+//        studentRepository.save(studentEntity);
+//        return "welcome";
+//    }
 
 
 }
