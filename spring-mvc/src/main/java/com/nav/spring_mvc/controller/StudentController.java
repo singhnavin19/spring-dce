@@ -6,10 +6,7 @@ import com.nav.spring_mvc.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class StudentController {
@@ -34,8 +31,14 @@ public class StudentController {
     @GetMapping("/allStudent")
     public String hello(Model model){
         model.addAttribute("allStudent",studentRepository.findAll());
-        model.addAttribute("studentDetail",studentRepository.findById(1).get());
         return "welcome";
+    }
+
+    @GetMapping("/deleteStudent/{id}")
+    public String deleletStudent(@PathVariable Integer id){
+        System.out.println("delete called"+id);
+        studentRepository.deleteById(id);
+        return "redirect:/allStudent";
     }
 
 }
