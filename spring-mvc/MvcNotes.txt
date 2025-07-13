@@ -1,0 +1,219 @@
+What is Thymeleaf?
+	• Thymeleaf is a java template engine, Commonly used to generate the HTML views for the web.
+	• It is a general-purpose template engine which is capable of both web and standalone environment to generate dynamic views.
+	• It is a separate project, unrelated to spring we can create views without the use of spring.
+
+Thymeleaf template
+	• A thymeleaf template can be a combination of HTML tags with some thymeleaf expressions.
+	• It includes dynamic content to an HTML page with the help of thymeleaf expressions.
+	• It can access java code, objects, spring beans, and so on.
+
+
+
+
+
+
+1. th:text
+
+	The th:text attribute is responsible for displaying text that is evaluated from the expression inside it.​
+
+	<h2 th:text="${message}">Hello Good Morning!.</h2>
+
+	The th:text attribute evaluates its value expression and sets the result as the body of the host tag,
+effectively replacing the “Hello Good Morning!” text we see in the code.
+
+	example
+
+	The below example demonstrates the usage of th:text attribute to evaluate variable expressions and result as the body of the <strong> tag:
+
+	    <p> Name: <strong th:text="${user.name}"></strong></p>
+    <p> Email: <strong th:text="${user.email}"></strong></p>
+    <p> Role: <strong th:text="${user.role}"></strong></p>
+    <p> Gender: <strong th:text="${user.gender}"></strong></p>
+
+
+	2. th:each
+
+ Syntax
+		<tag th:each="variableName : ${collectionName}">
+    </tag>
+
+
+		<tr th:each="employee : ${employees}">
+                        <td th:text="${employee.firstName}"></td>
+                        <td th:text="${employee.lastName}"></td>
+                        <td th:text="${employee.email}"></td>
+ </tr>
+
+		tag th:each="item, status : ${collection}">
+    </tag>
+		The status variable (you can name it anything, e.g., iterStat, iStatus) has the following properties:
+
+			• index: The current iteration index, 0-based. (e.g., 0, 1, 2...)
+			• count: The current iteration count, 1-based. (e.g., 1, 2, 3...)
+			• size: The total number of elements in the iterated collection.
+			• current: The current element in the iteration (same as item variable).
+			• even: true if the current index is even.
+			• odd: true if the current index is odd.
+			• first: true if the current iteration is the first one.
+			• last: true if the current iteration is the last one.
+
+		th:block for Iteration
+		Sometimes you need to iterate over a collection but don't want to create an extra HTML tag for each iteration. This is where <th:block> comes in handy.
+
+		<th:block th:each="product : ${products}">
+			 <h4>Product: <span th:text="${product.name}"></span>
+			</h4> <p>Cost: <span th:text="${product.price}"></span>
+			</p>
+		           <hr/>
+		 </th:block>
+
+
+	3. th:if
+
+		Syntax
+			<div th:if="${condition}">
+  <!-- This will be rendered only if 'condition' evaluates to true -->
+</div>
+
+		Truthiness Rules
+		Thymeleaf considers the following values false in th:if and treats everything else as true:
+			• null
+			• false (boolean)
+			• 0 (number)
+			• Strings "false", "off", "no" All other non-null, non-zero, non-false values count as true.
+
+		Example
+		<p th:if="${user.active}">
+  Welcome back, <span th:text="${user.name}">User</span>!
+</p>
+		If user.active == true, the paragraph renders; otherwise it’s omitted.
+
+	4.  th:unless
+		Meaning: The opposite of th:if. Renders the HTML element only if the condition evaluates to false.
+
+Example:
+		• Always keep the ! or not inside the ${…}.
+<!-- Wrong: ! is outside the expression -->
+<div th:if="!${user.active}">…</div>
+		• Make sure the property you negate isn’t null; otherwise you’ll get an evaluation error.
+<!-- Safe null-check first -->
+<div th:if="${user != null and not user.active}">…</div>
+		• When dealing with collections, you can also use:
+<div th:if="${empty items}">No entries found.</div>
+
+which is a shorthand for #lists.isEmpty(items) or items.size() == 0
+
+
+	5. th:switch and th:case
+
+		Meaning: Used for conditional rendering based on multiple possible values, similar to a Java switch statement.
+		Example:
+HTML
+
+<div th:switch="${user.role}">
+    <p th:case="'ADMIN'">User is an administrator</p>
+    <p th:case="'MANAGER'">User is a manager</p>
+    <p th:case="*">User has another role</p> </div>
+
+	6. th:href
+
+Wrap your URL in @{} inside the th:href:
+	Syntax
+		<a th:href="@{/orders/list}">View Orders</a>
+
+
+	Path Variables
+	Syntax:
+		<a th:href="@{/path/{variableName}(variableName=${yourData})}"`>Link Text</a>
+
+		<a th:href="@{/products/{id}(id=${productId})}">View Product 123</a>
+		<a th:href="@{/products/{category}/{id}(category=${categoryName}, id=${productId})}">View Electronics Product 123</a>
+		Explanation:
+			§ @{/products/{id}(id=${productId})}: Here, {id} is the path variable placeholder.
+			§ The (id=${productId}) part then maps the value of your productId model attribute to this placeholder.
+
+	Query Parameters(❓)
+
+	 In th:href, you define query parameters as key=value pairs within the parentheses (), separated by commas.
+	  Thymeleaf automatically handles the ? and & formatting.
+
+	Synatx
+		<a th:href="@{/path/resource(paramName=${yourValue}, anotherParam=${anotherValue})}"`>Link Text</a>
+
+	<a th:href="@{/users/{id}/orders(id=${userId}, status=${orderStatus}, size=${pageSize})}"> View Pending Orders for User 456 </a>
+
+	7. HTML Forms
+		• th:action: defines the form’s submission URL
+
+		            <form th:action="@{/save-project}" th:object="${project}" method="post">
+
+		• th:object: binds the form to a model attribute (command object).
+
+		• th:field: links each input, select, or textarea to a property of the bound object.
+
+			<input type="number"   th:field="*{days}"       />   <!-- binds to an Integer -->
+			<input type="date"         th:field="*{launchDate}" />   <!-- binds to a LocalDate -->
+			<input type="color"        th:field="*{color}"      />   <!-- binds to a String -->
+			<textarea                           th:field="*{description}" rows="4"></textarea>
+
+
+			<!-- Radio group for “days” property -->
+			<input type="radio" th:field="*{days}" value="15"/> 15 Days
+			<input type="radio" th:field="*{days}" value="30"/> 30 Days
+
+			<!-- Single checkbox for “featured” Boolean -->
+			<input type="checkbox" th:field="*{featured}" /> Mark Featured
+
+Single-select
+			<select th:field="*{coachId}">
+			  <option value="">Choose coach</option>
+			  <option th:each="u : ${coaches}"
+			          th:value="${u.id}"
+			          th:text="${u.name}"></option>
+			</select>
+
+			Multi-select
+			<select th:field="*{roles}" multiple size="5">
+			  <option th:each="r : ${allRoles}"
+			          th:value="${r}" th:text="${r}"></option>
+			</select>
+
+		• th:errors: displays validation messages for a given field.
+		• th:errorclass: appends a CSS class when a field has errors.
+
+
+	8. th:src
+		Meaning: Sets the src attribute of <img>, <script>, or other elements. Similar to th:href for URL generation.
+		Example: <img th:src="@{/images/logo.png}" alt="Logo">
+
+	9. th:alt / th:title / th:id / th:class / etc.
+		Meaning: Thymeleaf provides direct attributes for most standard HTML attributes. These work similarly to th:text or th:value, evaluating an expression to set the corresponding HTML attribute's value.
+		Example:
+HTML
+
+<img th:src="@{/images/icon.png}" th:alt="${iconDescription}" th:title="${iconTooltip}">
+<div th:id="${'user-' + user.id}" th:class="${user.isAdmin} ? 'admin-user' : 'normal-user'">
+	10.  th:fragment and th:insert / th:replace
+		th:fragment:
+			Meaning: Defines a reusable section (fragment) of an HTML template that can be included in other templates.
+			Example (in common.html): <div th:fragment="footer">Copyright 2025</div>
+		th:insert:
+			Meaning: Inserts the content of a fragment into the current element. The current element is retained.
+			Example: <div th:insert="~{common :: footer}"></div>
+		th:replace:
+			Meaning: Replaces the current element with the content of a fragment. The current element is not retained.
+			Example: <footer th:replace="~{common :: footer}"></footer>
+
+	11. th:remove
+		Meaning: Removes the element from the generated output. Useful for prototyping content that should not appear in the final rendered page.
+		Options: all (removes the element and its children), body (removes only the children), tag (removes only the tag, keeping children), all-but-first (removes all children except the first), none.
+		Example: <p th:remove="all">This paragraph will not be rendered.</p>
+
+	12. th:utext
+		Meaning: Similar to th:text, but it sets the unescaped text content of the HTML element.
+		   Use with caution, as it can introduce XSS vulnerabilities if the content is not sanitized.
+		Example: <div th:utext="${htmlContent}"></div>
+			If ${htmlContent} evaluates to "&lt;b>Bold Text&lt;/b>", the output will be <div><b>Bold Text</b></div>.
+
+

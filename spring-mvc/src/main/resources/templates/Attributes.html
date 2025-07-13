@@ -1,0 +1,17 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+    <body>
+
+        <h1 th:if="${name}=='Navin Singh'" th:text="${name}">hello</h1>
+
+
+        <p th:each="s,stat:${studentNames}"
+            th:text="${stat.count}+'. '+${s}"
+            th:style="${stat.even}?'color:green':'color:red'"
+        >
+            hello
+        </p>
+
+    </body>
+
+</html>

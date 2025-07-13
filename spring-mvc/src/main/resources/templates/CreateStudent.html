@@ -7,13 +7,12 @@
           rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
           crossorigin="anonymous">
-
 </head>
 <body>
-<form action="/saveStudent" method="get">
+<form th:action="/saveStudent" method="get">
     <div class="form-group">
         <label for="studentName">Student Name</label>
-        <input type="text" class="form-control" id="studentName" value="" name="name">
+        <input type="text" class="form-control" id="studentName" th:value="" name="name">
     </div>
     <div class="form-group">
         <label for="address">Address</label>
