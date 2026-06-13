@@ -7,9 +7,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="springJpa" />
+        <module name="springcrud" />
         <module name="spring-bean" />
         <module name="springRest" />
+        <module name="springJpa" />
+        <module name="springjpa" />
+        <module name="springJpaMysql" />
       </profile>
       <profile name="Annotation profile for spring-mvc" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
@@ -27,7 +30,10 @@
       <module name="spring-bean" options="-parameters" />
       <module name="spring-mvc" options="-parameters" />
       <module name="springJpa" options="-parameters" />
+      <module name="springJpaMysql" options="-parameters" />
       <module name="springRest" options="-parameters" />
+      <module name="springcrud" options="-parameters" />
+      <module name="springjpa" options="-parameters" />
     </option>
   </component>
 </project>
