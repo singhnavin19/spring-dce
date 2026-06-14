@@ -2,8 +2,10 @@ package com.nav.springjpamysql;
 
 import com.nav.springjpamysql.entity.StudentAddress;
 import com.nav.springjpamysql.entity.StudentDetail;
+import com.nav.springjpamysql.entity.StudentMarks;
 import com.nav.springjpamysql.repository.StudentAddressRepository;
 import com.nav.springjpamysql.repository.StudentDetailsRepository;
+import com.nav.springjpamysql.repository.StudentMarksRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -21,6 +23,10 @@ public class SpringJpaMysqlApplication implements CommandLineRunner {
 
     @Autowired
     StudentAddressRepository studentAddressRepository;
+
+    @Autowired
+    private StudentMarksRepository studentMarksRepository;
+
 	public static void main(String[] args) {
 		SpringApplication.run(SpringJpaMysqlApplication.class, args);
 	}
@@ -34,6 +40,8 @@ public class SpringJpaMysqlApplication implements CommandLineRunner {
         System.out.println(datas);
 
         StudentAddress studentAddress=new StudentAddress(1,"Mumbai MH","Johnpur UP");
-        studentAddressRepository.save(studentAddress);
+//        studentAddressRepository.save(studentAddress);
+
+        studentMarksRepository.save(new StudentMarks(1,"Hindi",90));
     }
 }
