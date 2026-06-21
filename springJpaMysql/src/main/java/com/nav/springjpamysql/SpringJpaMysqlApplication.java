@@ -44,6 +44,7 @@ public class SpringJpaMysqlApplication implements CommandLineRunner {
         System.out.println(studentDetail1);
         System.out.println(studentDetailsRepository.findByName("Navin1"));
         IO.println(studentDetailService.getNameById(1));
+        IO.println(studentDetailsRepository.findAllStudentNative("Navin"));
 //        List<StudentDetail> datas=studentDetailsRepository.findAll();
 //        System.out.println(datas);
 //
