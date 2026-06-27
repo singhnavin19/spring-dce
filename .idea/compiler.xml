@@ -7,12 +7,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="jparelation" />
+        <module name="springJpaMysql" />
         <module name="springcrud" />
         <module name="spring-bean" />
         <module name="springRest" />
         <module name="springJpa" />
         <module name="springjpa" />
-        <module name="springJpaMysql" />
       </profile>
       <profile name="Annotation profile for spring-mvc" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
@@ -27,6 +28,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="jparelation" options="-parameters" />
       <module name="spring-bean" options="-parameters" />
       <module name="spring-mvc" options="-parameters" />
       <module name="springJpa" options="-parameters" />

@@ -10,6 +10,7 @@
         <option value="$PROJECT_DIR$/spring-mvc/pom.xml" />
         <option value="$PROJECT_DIR$/springcrud/pom.xml" />
         <option value="$PROJECT_DIR$/springJpaMysql/pom.xml" />
+        <option value="$PROJECT_DIR$/jparelation/pom.xml" />
       </list>
     </option>
   </component>
