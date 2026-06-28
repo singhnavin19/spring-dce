@@ -3,6 +3,8 @@ package com.nav.jparelation.entity;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "student")
@@ -23,13 +25,8 @@ public class StudentEntity {
     @Column
     private LocalDate dateOfBirth;
 
-    public Integer getSid() {
-        return sid;
-    }
-
-    public void setSid(Integer sid) {
-        this.sid = sid;
-    }
+    @OneToMany(mappedBy = "student",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    List<StudentAddressEntity> studentAddressEntities=new ArrayList<>();
 
     public String getFirstName() {
         return firstName;
@@ -63,13 +60,24 @@ public class StudentEntity {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public StudentEntity(String firstName, String middleName, String lastName, LocalDate dateOfBirth) {
+    public List<StudentAddressEntity> getStudentAddressEntities() {
+        return studentAddressEntities;
+    }
+
+    public void setStudentAddressEntities(List<StudentAddressEntity> studentAddressEntities) {
+        this.studentAddressEntities = studentAddressEntities;
+    }
+
+    public StudentEntity(Integer sid, String firstName, String middleName, String lastName, LocalDate dateOfBirth, List<StudentAddressEntity> studentAddressEntities) {
+        this.sid = sid;
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
+        this.studentAddressEntities = studentAddressEntities;
     }
     public StudentEntity(){}
+
     @Override
     public String toString() {
         return "StudentEntity{" +
@@ -78,6 +86,7 @@ public class StudentEntity {
                 ", middleName='" + middleName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", dateOfBirth=" + dateOfBirth +
+                ", studentAddressEntities=" + studentAddressEntities +
                 '}';
     }
 }

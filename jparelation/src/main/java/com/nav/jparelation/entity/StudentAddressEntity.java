@@ -10,13 +10,14 @@ public class StudentAddressEntity {
     private Integer addressId;
 
     @Column
-    private Integer sid;
-
-    @Column
     private String addressType;
 
     @Column(length = 700)
     private String address;
+
+    @ManyToOne
+    @JoinColumn(name = "student_id")
+    private StudentEntity student;
 
     public Integer getAddressId() {
         return addressId;
@@ -24,14 +25,6 @@ public class StudentAddressEntity {
 
     public void setAddressId(Integer addressId) {
         this.addressId = addressId;
-    }
-
-    public Integer getSid() {
-        return sid;
-    }
-
-    public void setSid(Integer sid) {
-        this.sid = sid;
     }
 
     public String getAddressType() {
@@ -50,20 +43,30 @@ public class StudentAddressEntity {
         this.address = address;
     }
 
-    public StudentAddressEntity(Integer sid, String addressType, String address) {
-        this.sid = sid;
+    public StudentEntity getStudent() {
+        return student;
+    }
+
+    public void setStudent(StudentEntity student) {
+        this.student = student;
+    }
+
+    public StudentAddressEntity(Integer addressId, String addressType, String address, StudentEntity student) {
+        this.addressId = addressId;
         this.addressType = addressType;
         this.address = address;
+        this.student = student;
     }
 
     @Override
     public String toString() {
         return "StudentAddressEntity{" +
                 "addressId=" + addressId +
-                ", sid=" + sid +
                 ", addressType='" + addressType + '\'' +
                 ", address='" + address + '\'' +
+//                ", studentEntity=" + student +
                 '}';
     }
+
     public StudentAddressEntity(){}
 }

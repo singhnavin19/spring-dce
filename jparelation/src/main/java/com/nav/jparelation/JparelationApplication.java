@@ -11,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @SpringBootApplication
 public class JparelationApplication implements CommandLineRunner {
@@ -25,30 +26,34 @@ public class JparelationApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-//        createStudent();
-//        List<StudentAddressEntity> addressEntities = List.of(createAdress("temp", "Mumbai-40101", 1), createAdress("temp", "Mumbai-40101", 1));
-//        studentAddressRepository.saveAll(addressEntities);
+//       StudentEntity studentEntity= createStudent();
+//
+//        List<StudentAddressEntity> addressEntities = List.of(
+//                createAdress("temp", "Mumbai-40101", 1,studentEntity),
+//                createAdress("temp", "Mumbai-40101", 1,studentEntity)
+//        );
+//        studentEntity.setStudentAddressEntities(addressEntities);
+//        studentRepository.save(studentEntity);
+        //        studentAddressRepository.saveAll(addressEntities);
 //        System.out.println(addressEntities);
 
-
+        Optional<StudentEntity> studentEntity=studentRepository.findById(52);
+        System.out.println(studentEntity.get());
     }
 
-    private static StudentAddressEntity createAdress(String addressType, String address, int sid) {
+    private static StudentAddressEntity createAdress(String addressType, String address, int sid,StudentEntity studentEntity) {
         StudentAddressEntity studentAddress=new StudentAddressEntity();
         studentAddress.setAddressType(addressType);
         studentAddress.setAddress(address);
-        studentAddress.setSid(sid);
+        studentAddress.setStudent(studentEntity);
         return studentAddress;
     }
 
-    private void createStudent() {
+    private StudentEntity createStudent() {
         StudentEntity student=new StudentEntity();
         student.setFirstName("Navin");
         student.setLastName("Singh");
         student.setDateOfBirth(LocalDate.of(1991,02,18));
-
-        studentRepository.save(student);
-
-        System.out.println(student);
+        return student;
     }
 }
