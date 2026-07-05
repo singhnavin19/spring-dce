@@ -8,21 +8,13 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="jparelation" />
+        <module name="spring-mvc" />
         <module name="springJpaMysql" />
         <module name="springcrud" />
         <module name="spring-bean" />
         <module name="springRest" />
         <module name="springJpa" />
         <module name="springjpa" />
-      </profile>
-      <profile name="Annotation profile for spring-mvc" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
-        </processorPath>
-        <module name="spring-mvc" />
       </profile>
     </annotationProcessing>
   </component>
