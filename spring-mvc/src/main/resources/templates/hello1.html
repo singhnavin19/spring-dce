@@ -9,5 +9,15 @@
 
 <!-- Thymeleaf dynamically replaces this text with the "message" attribute from Java -->
 <a href="/byebye">say Bye Bye</a>
+<form action="/login" method="post">
+    UserName <input type="text" name="userName" id="userName">
+    <br> <br>
+    Password <input type="password" name="password" id="password">
+    <input type="submit" value="login">
+</form>
+<h1 th:text="${data}">hello</h1>
+<ol th:each="name:${students}">
+    <li th:text="${name}">studentName</li>
+</ol>
 </body>
 </html>
