@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>My First HTML page</title>
+</head>
+<body>
+<nav th:fragment="site-menu(activePage)" class="navbar">
+    <ul class="nav-links">
+        <li>
+            <a th:href="@{/}"
+               th:class="${activePage == 'home'} ? 'active' : ''">Home</a>
+        </li>
+        <li>
+            <a th:href="@{/products}"
+               th:class="${activePage == 'products'} ? 'active' : ''">Products</a>
+        </li>
+        <li>
+            <a th:href="@{/about}"
+               th:class="${activePage == 'about'} ? 'active' : ''">About Us</a>
+        </li>
+        <li>
+            <a th:href="@{/contact}"
+               th:class="${activePage == 'contact'} ? 'active' : ''">Contact</a>
+        </li>
+        <li>
+            <a th:href="@{/navin}"
+               th:class="${activePage == 'navin'} ? 'active' : ''">Navin</a>
+        </li>
+
+    </ul>
+</nav></body>

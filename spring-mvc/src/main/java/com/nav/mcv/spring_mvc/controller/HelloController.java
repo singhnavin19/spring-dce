@@ -7,10 +7,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HelloController {
 
-    @GetMapping("/hello")
-    public String sayHello(){
+    @GetMapping("/loginpage")
+    public String sayHello(Model model){
         System.out.println("sayHello Method");
-        return "hello1";
+        model.addAttribute("isDisplay",false);
+        return "login";
     }
     @GetMapping("/byebye")
     public String sayByeBye(Model model){
